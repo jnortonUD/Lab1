@@ -9,17 +9,45 @@ public class Round {
 	private LinkedList<Roll> rolls = new LinkedList<Roll>();
 
 	public Round() {
-		// TODO: Execute Come Out roll, value ComeOutScore
-
-		// TODO: Create a loop that will execute a roll until point is made, or
-		// seven-out
-
-		// TODO: value the eGameResult after the round is complete
+		
+		final Roll ComeOutRoll = new Roll();
+		ComeOutScore = ComeOutRoll.getScore();
+		rolls.add(ComeOutRoll);
+		
+		if(ComeOutScore == 2 || ComeOutScore == 3 || ComeOutScore == 12) {
+			eGameResult = eGameResult.CRAPS;
+		}
+		
+		else if(ComeOutScore == 7 || ComeOutScore == 11) {
+			eGameResult = eGameResult.NATURAL;
+		}
+		
+		while(true) {
+			Roll newRoll = new Roll();
+			int rollScore = newRoll.getScore();
+			rolls.add(newRoll);
+			
+			if(rollScore == ComeOutScore) {
+				eGameResult = eGameResult.POINT;
+				break;
+			}
+				
+			else if(rollScore == 7) {
+				eGameResult = eGameResult.SEVEN_OUT;
+				break;
+			}
+		}
 	}
 
 	public int RollCount() {
-		// Return the roll count
-		return 0;
+		return rolls.size();
 	}
-
+	
+	public eGameResult geteGameResult() {
+		return eGameResult;
+	}
+	
+	public LinkedList<Roll> getRolls(){
+		return rolls;
+	}
 }
