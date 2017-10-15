@@ -10,7 +10,7 @@ public class Round {
 
 	public Round() {
 		
-		final Roll ComeOutRoll = new Roll();
+		Roll ComeOutRoll = new Roll();
 		ComeOutScore = ComeOutRoll.getScore();
 		rolls.add(ComeOutRoll);
 		
@@ -22,19 +22,20 @@ public class Round {
 			eGameResult = eGameResult.NATURAL;
 		}
 		
-		while(true) {
-			Roll newRoll = new Roll();
-			int rollScore = newRoll.getScore();
-			rolls.add(newRoll);
-			
-			if(rollScore == ComeOutScore) {
-				eGameResult = eGameResult.POINT;
-				break;
-			}
+		else {
+			while(true) {
+				Roll newRoll = new Roll();
+				int rollScore = newRoll.getScore();
+				rolls.add(newRoll);
 				
-			else if(rollScore == 7) {
-				eGameResult = eGameResult.SEVEN_OUT;
-				break;
+				if(rollScore == 7) {
+					eGameResult = eGameResult.SEVEN_OUT;
+					break;
+				}
+				else if(rollScore == ComeOutScore) {
+					eGameResult = eGameResult.POINT;
+					break;
+				}
 			}
 		}
 	}
